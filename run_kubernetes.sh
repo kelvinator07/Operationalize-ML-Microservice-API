@@ -4,14 +4,12 @@
 
 # Step 1:
 # This is your Docker ID/path
-dockerpath="/Users/kelvini/Projects/container-revolution-devops-microservices/demos/flask-sklearn"
+dockerpath="kelvinator07/projectml"
 
 # Step 2
 # Run the Docker Hub container with kubernetes
-kubectl run flaskskearlndemo \
-    --generator=run-pod/v1 \
-    --image=$dockerpath \
-    --port=80 --labels app=flaskskearlndemo
+docker login
+kubectl create deployment prediction-as-a-pod --image=$dockerpath:latest
 
 # Step 3:
 # List kubernetes pods
@@ -19,4 +17,4 @@ kubectl get pods
 
 # Step 4:
 # Forward the container port to a host
-kubectl port-forward flaskskearlndemo 8000:80
+kubectl port-forward deployment/prediction-as-a-pod 8000:80
